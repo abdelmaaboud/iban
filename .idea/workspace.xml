@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="71f4e9e2-9b0c-4d3e-a0b1-1b3b3e6e4326" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/IBAN/settings.py" afterPath="$PROJECT_DIR$/IBAN/settings.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
