@@ -1,0 +1,7 @@
+1519564488794	geckodriver	INFO	geckodriver 0.19.1
+1519564488799	geckodriver	INFO	Listening on 127.0.0.1:35069
+1519564489932	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "-marionette" "-profile" "/tmp/rust_mozprofile.fYTT4P5SQ3sv"
+1519564490969	Marionette	INFO	Enabled via --marionette
+1519564493937	Marionette	INFO	Listening on port 44493
+1519564493971	Marionette	WARN	TLS certificate errors will be ignored for this session
+[Child 9180, Chrome_ChildThread] WARNING: pipe error (21): Connection reset by peer: file /build/firefox-9j9NY8/firefox-58.0.2+build1/ipc/chromium/src/chrome/common/ipc_channel_posix.cc, line 353
