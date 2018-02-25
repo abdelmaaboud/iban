@@ -20,7 +20,7 @@ class UserIbanCase(LiveServerTestCase):
                                                                     password='password3')
 
     # this test Case just try to test admin login
-    def test_failed_admin_login(self):
+    def _test_failed_admin_login(self):
 
         home_page = self.browser.get(self.live_server_url + '/admin')
 
@@ -33,6 +33,25 @@ class UserIbanCase(LiveServerTestCase):
 
         error = self.browser.find_element_by_class_name("errornote")
         self.assertIsNotNone(error)
+
+    # this test Case just try to test admin login
+    def test_admin_login(self):
+        home_page = self.browser.get(self.live_server_url + '/admin')
+
+        user_name_input = self.browser.find_element_by_name("username")
+        password_input = self.browser.find_element_by_name("password")
+        submit = self.browser.find_element_by_xpath("//input[@type='submit']")
+
+        user_name_input.clear()
+        password_input.clear()
+
+        user_name_input.send_keys("islam")
+        password_input.send_keys("password1")
+        submit.submit()
+        time.sleep(1)
+        body = self.browser.find_element_by_tag_name('body')
+        self.assertIn('Site administration', body.text)
+
     def tearDown(self):
         time.sleep(1)
         self.browser.quit()
