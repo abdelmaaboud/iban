@@ -76,6 +76,7 @@ class UserIbanCase(LiveServerTestCase):
 
         users_link = self.browser.find_elements_by_partial_link_text("Users IBAN")
         users_link[0].click()
+        time.sleep(1)
         add_user = self.browser.find_element_by_partial_link_text('Add user')
         add_user.click()
 
@@ -109,10 +110,9 @@ class UserIbanCase(LiveServerTestCase):
 
         users_link = self.browser.find_elements_by_partial_link_text("Users IBAN")
         users_link[0].click()
-        time.sleep(5)
+        time.sleep(1)
         add_user = self.browser.find_element_by_partial_link_text('mohamed')
         add_user.click()
-
 
         first_name_input = self.browser.find_element_by_name("first_name")
         last_name_input = self.browser.find_element_by_name("last_name")
@@ -145,6 +145,7 @@ class UserIbanCase(LiveServerTestCase):
 
         users_link = self.browser.find_elements_by_partial_link_text("Users IBAN")
         users_link[0].click()
+        time.sleep(1)
         add_user = self.browser.find_element_by_partial_link_text('hany')
         add_user.click()
 
@@ -202,6 +203,8 @@ class UserIbanCase(LiveServerTestCase):
 
         users_link = self.browser.find_elements_by_partial_link_text("Users IBAN")
         users_link[0].click()
+        time.sleep(1)
+
         add_user = self.browser.find_element_by_partial_link_text('amr')
         add_user.click()
         time.sleep(1)
