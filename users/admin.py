@@ -26,4 +26,12 @@ class UserAdmin(admin.ModelAdmin):
         obj.created_by = request.user
         obj.save()
 
+    def delete_model(self, request, obj):
+        if obj.created_by != request.user:
+            messages.set_level(request, messages.ERROR)
+            messages.error(request, 'No changes are permitted ..Not allowed To Edit This User')
+        else :
+            obj.delete()
+
+
 admin.site.register(User,UserAdmin)
