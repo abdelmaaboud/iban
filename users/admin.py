@@ -13,6 +13,7 @@ class UserAdmin(admin.ModelAdmin):
     list_display = ["first_name","last_name","iban",'created_by']
     list_filter = ['created_by']
     readonly_fields = ('created_by', )
+    actions = ['delete_selected']
 
     def save_model(self, request, obj, form, change):
         try:
@@ -32,6 +33,11 @@ class UserAdmin(admin.ModelAdmin):
             messages.error(request, 'No changes are permitted ..Not allowed To Edit This User')
         else :
             obj.delete()
+
+    def delete_selected(self, request, obj):
+        for o in obj.all():
+            self.delete_model(request,o)
+
 
 
 admin.site.register(User,UserAdmin)
