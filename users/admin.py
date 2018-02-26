@@ -15,8 +15,15 @@ class UserAdmin(admin.ModelAdmin):
     readonly_fields = ('created_by', )
 
     def save_model(self, request, obj, form, change):
+        try:
+            if obj.created_by :
+                if obj.created_by != request.user:
+                    messages.set_level(request, messages.ERROR)
+                    messages.error(request, 'No changes are permitted ..Not allowed To Edit This User')
+                    return False
+        except:
+            pass
         obj.created_by = request.user
         obj.save()
-
 
 admin.site.register(User,UserAdmin)
