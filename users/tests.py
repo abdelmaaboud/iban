@@ -20,6 +20,9 @@ class UserIbanCase(LiveServerTestCase):
         User.objects.create(first_name="mohamed",last_name="sayed",iban="123456789",created_by= self.admin_user2)
         User.objects.create(first_name="ramy",last_name="samir",iban="5678912354",created_by= self.admin_user1)
         User.objects.create(first_name="hany",last_name="bassem",iban="5678912354",created_by= self.admin_user1)
+        User.objects.create(first_name="rania",last_name="aaa",iban="25698429852",created_by= self.admin_user3)
+        User.objects.create(first_name="amr",last_name="barakat",iban="25698429852",created_by= self.admin_user2)
+
     # this test Case just try to test admin login
     """
     def test_failed_admin_login(self):
@@ -158,6 +161,55 @@ class UserIbanCase(LiveServerTestCase):
         self.assertIn('was changed successfully', body.text)
 
         self.assertIn('amir', body.text)
+    # check update users that he added in admin pannel
+    def test_admin_delete_user(self):
+        home_page = self.browser.get(self.live_server_url + '/admin')
+        user_name_input = self.browser.find_element_by_name("username")
+        password_input = self.browser.find_element_by_name("password")
+        submit = self.browser.find_element_by_xpath("//input[@type='submit']")
+        user_name_input.clear()
+        password_input.clear()
+
+        user_name_input.send_keys("ali")
+        password_input.send_keys("password3")
+        submit.submit()
+
+        users_link = self.browser.find_elements_by_partial_link_text("Users IBAN")
+        users_link[0].click()
+        time.sleep(1)
+
+        add_user = self.browser.find_element_by_partial_link_text('rania')
+        add_user.click()
+        time.sleep(1)
+        self.browser.find_element_by_class_name("deletelink").click()
+        self.browser.find_element_by_xpath("//input[@type='submit']").submit()
+        time.sleep(10)
+        body = self.browser.find_element_by_tag_name('body')
+        self.assertIn('was deleted successfully', body.text)
+    # check can't delete users that he didn't add in admin pannel
+
+    def test_admin_not_delete_user(self):
+        home_page = self.browser.get(self.live_server_url + '/admin')
+        user_name_input = self.browser.find_element_by_name("username")
+        password_input = self.browser.find_element_by_name("password")
+        submit = self.browser.find_element_by_xpath("//input[@type='submit']")
+        user_name_input.clear()
+        password_input.clear()
+
+        user_name_input.send_keys("ali")
+        password_input.send_keys("password3")
+        submit.submit()
+
+        users_link = self.browser.find_elements_by_partial_link_text("Users IBAN")
+        users_link[0].click()
+        add_user = self.browser.find_element_by_partial_link_text('amr')
+        add_user.click()
+        time.sleep(1)
+        self.browser.find_element_by_class_name("deletelink").click()
+        self.browser.find_element_by_xpath("//input[@type='submit']").submit()
+        time.sleep(1)
+        body = self.browser.find_element_by_tag_name('body')
+        self.assertNotIn('was deleted successfully', body.text)
 
     def tearDown(self):
         time.sleep(1)
